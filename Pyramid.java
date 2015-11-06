@@ -25,7 +25,7 @@ public class Pyramid {
 	
 	public void insertString(String string){
 		String alphabet = "abcdefghijklmnopqrstuvwxyz";
-		for (int i = 0; i < columns.length; i++) {
+		for (int i = 0; i < columns.length && i < string.length(); i++) {
 			int currentChar = alphabet.indexOf(string.charAt(i));
 			if (currentChar != -1) {
 				columns[i].push(currentChar); 
@@ -34,7 +34,7 @@ public class Pyramid {
 	}
 	
 	public void insertArrayListString(ArrayList<String> list, int from, int to){
-		for (int i = from; i < 1; i++) {
+		for (int i = from; i < to; i++) {
 			this.insertString(list.get(i));  
 		}
 	}

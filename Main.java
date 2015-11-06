@@ -1,5 +1,6 @@
 package main;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -8,20 +9,28 @@ public class Main {
 		ArrayList<String> dictionaryLines = reader.read("dictionary.txt");
 		ArrayList<String> puzzleLines = reader.read("puzzles.txt");
 
-		Pyramid pyramid = new Pyramid();
-		pyramid.insertArrayListString(puzzleLines, 0, 8);
-		
 		TrieTree trieTree = new TrieTree();
-		trieTree.value = -1;
-		trieTree.insertList(dictionaryLines);// gaat iets fout alleean de eerste rij lijkt geinsert te worden
+		trieTree.value = -1;// ugly thing has due to weirdish implementation of trietree
+		trieTree.insertList(dictionaryLines);
 		
-		for(int i = 0; i < 6; i++){
-			LinkedList bottom = new LinkedList();
-			bottom.intArrayToThis(pyramid.getBottom());
-			LinkedList biggestWord = trieTree.findDeepest(bottom);
-			System.out.println(biggestWord.stringify());
-			pyramid.removeArray(biggestWord.arrayifi());
+		for(int i = 0; i < 10; i++){
+			Pyramid pyramid = new Pyramid();
+			pyramid.insertArrayListString(puzzleLines, i * 8, i * 8 + 8);
+			
+			int[] empty = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+			String string = "";
+			while(!Arrays.equals(pyramid.getBottom(), empty)){
+				LinkedList bottom = new LinkedList();
+				bottom.intArrayToThis(pyramid.getBottom());
+				LinkedList biggestWord = trieTree.findDeepest(bottom);
+				
+				System.out.println(biggestWord.stringify());//vindt positie van letters net zoals in removearray
+				pyramid.removeArray(biggestWord.arrayifi());
+			}
+			System.out.println();
 		}
+		
+		
 		
 		
 //		LinkedList word = new LinkedList();

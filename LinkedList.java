@@ -155,6 +155,15 @@ public class LinkedList
         	return string;
         }
         
+        public String intStringify(){	
+        	int[] array = this.arrayifi();
+        	String string = "";
+        	for (int i : array) {
+				string = string + i;
+			}
+        	return string;
+        }
+        
         public int[] arrayifi(){
         	int[] array = new int[length];
         	Node currentNode = head.next;
