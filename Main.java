@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
-
+	//optimazations 
+	//1 why does it run faster in eclipse
+	//2 stop copying and give pointers
+	//3 the -1 thing
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Reader reader = new Reader();
@@ -22,9 +25,9 @@ public class Main {
 			
 			int[] empty = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			while(!Arrays.equals(pyramid.getBottom(), empty)){
-				LinkedList bottom = new LinkedList();
-				bottom.intArrayToThis(pyramid.getBottom());
-				LinkedList biggestWord = trieTree.findDeepest(bottom);
+//				LinkedList bottom = new LinkedList();
+//				bottom.intArrayToThis(pyramid.getBottom());
+				LinkedList biggestWord = trieTree.findDeepest(pyramid.getBottom(),0);
 				
 				boolean[] removed = pyramid.removeArray(biggestWord.arrayifi());
 				for(int j = 0; j < removed.length; j++){

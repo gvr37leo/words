@@ -105,11 +105,9 @@ public class LinkedList
         	Node currentNode = head;
         	length = 0;
         	for (int i = 0; i < array.length; i++) {
-        		if(array[i] != -1){// this is ugly since -1 is just a normal number altough it shouldnt appear in this program
-        			currentNode.next = new Node(array[i], null);
-    				currentNode = currentNode.next;
-    				length++;
-        		}
+        		currentNode.next = new Node(array[i], null);
+				currentNode = currentNode.next;
+				length++;
         	}
         }
         
