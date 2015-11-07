@@ -11,7 +11,7 @@ public class Pyramid {
 		}
 	}
 	
-	public void removeArray(int[] array){
+	public boolean[] removeArray(int[] array){
 		int[] bottom = getBottom();
 		boolean[] found = new boolean[columns.length];
 		for(int i = 0; i < array.length; i++){
@@ -21,6 +21,7 @@ public class Pyramid {
 				found[index] = true;
 			}
 		}
+		return found;
 	}
 	
 	public void insertString(String string){
