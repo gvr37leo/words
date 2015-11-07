@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Reader reader = new Reader();
-		ArrayList<String> dictionaryLines = reader.read("dictionary.txt");
-		ArrayList<String> puzzleLines = reader.read("puzzles.txt");
+		ArrayList<String> dictionaryLines = reader.read(args[0]);
+		ArrayList<String> puzzleLines = reader.read(args[1]);
 
 		TrieTree trieTree = new TrieTree();
 		trieTree.value = -1;// ugly thing has due to weirdish implementation of trietree
@@ -39,7 +39,7 @@ public class Main {
 			solutions.add(string);
 			System.out.println();
 		}
-		reader.write("solutions.txt", solutions);
+		reader.write(args[2], solutions);
 		long end = System.currentTimeMillis();
 		System.out.println((end - start) + " ms");
 	}
