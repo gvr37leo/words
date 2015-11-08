@@ -5,8 +5,7 @@ import java.util.Arrays;
 public class Main {
 	//optimazations 
 	//1 why does it run faster in eclipse
-	//2 stop copying and give pointers
-	//3 the -1 thing
+	//2 the -1 thing
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
 		Reader reader = new Reader();
@@ -28,8 +27,6 @@ public class Main {
 				int[] bottom = pyramid.getBottom();
 				Arrays.sort(bottom);
 				LinkedList biggestWord = trieTree.findDeepest(bottom,0);
-				//boeltje beejlot 1,4,4,9,11,14,19 | 1,2,3,4
-				//
 				boolean[] removed = pyramid.removeArray(biggestWord.arrayifi());
 				for(int j = 0; j < removed.length; j++){
 					if(removed[j] == true){

@@ -44,14 +44,12 @@ public class TrieTree {
 	
 	public LinkedList findDeepest(int[] word,int from){
 		LinkedList deepist = new LinkedList();
-		int wordlength = word.length - from;
-		if(wordlength == 0){
+		if(word.length - from == 0){
 			if(exists  && value != -1){
 				deepist.addFirst(value);
 			}
 			return deepist;
 		}else{
-//			1,4,4,9,11,14,19 / 1,2,3,4,5,6 | 1,2,3,4 / 1,4,4,9
 			for(int i = from; i < word.length; i++){
 				int currentLetter = word[i];
 				if(currentLetter != -1 && children[currentLetter] != null){
