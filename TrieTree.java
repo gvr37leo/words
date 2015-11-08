@@ -51,8 +51,9 @@ public class TrieTree {
 			}
 			return deepist;
 		}else{
-			for(int i = from; i < wordlength; i++){
-				int currentLetter = word[from + i];
+//			1,4,4,9,11,14,19 / 1,2,3,4,5,6 | 1,2,3,4 / 1,4,4,9
+			for(int i = from; i < word.length; i++){
+				int currentLetter = word[i];
 				if(currentLetter != -1 && children[currentLetter] != null){
 					LinkedList localDeepist = children[currentLetter].findDeepest(word,from + 1);
 					if(localDeepist.getLength() > deepist.getLength()){

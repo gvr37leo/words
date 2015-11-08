@@ -25,10 +25,11 @@ public class Main {
 			
 			int[] empty = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			while(!Arrays.equals(pyramid.getBottom(), empty)){
-//				LinkedList bottom = new LinkedList();
-//				bottom.intArrayToThis(pyramid.getBottom());
-				LinkedList biggestWord = trieTree.findDeepest(pyramid.getBottom(),0);
-				
+				int[] bottom = pyramid.getBottom();
+				Arrays.sort(bottom);
+				LinkedList biggestWord = trieTree.findDeepest(bottom,0);
+				//boeltje beejlot 1,4,4,9,11,14,19 | 1,2,3,4
+				//
 				boolean[] removed = pyramid.removeArray(biggestWord.arrayifi());
 				for(int j = 0; j < removed.length; j++){
 					if(removed[j] == true){
