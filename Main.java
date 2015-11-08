@@ -26,7 +26,7 @@ public class Main {
 			while(!Arrays.equals(pyramid.getBottom(), empty)){
 				int[] bottom = pyramid.getBottom();
 				Arrays.sort(bottom);
-				LinkedList biggestWord = trieTree.findDeepest(bottom,0);
+				LinkedList biggestWord = trieTree.findDeepest(bottom);
 				boolean[] removed = pyramid.removeArray(biggestWord.arrayifi());
 				for(int j = 0; j < removed.length; j++){
 					if(removed[j] == true){

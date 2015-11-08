@@ -42,7 +42,11 @@ public class TrieTree {
 		return children[index].exists(linkedList);
 	}
 	
-	public LinkedList findDeepest(int[] word,int from){
+	public LinkedList findDeepest(int[] word){
+		return findDeepest(word,0);
+	}
+	
+	private LinkedList findDeepest(int[] word,int from){
 		LinkedList deepist = new LinkedList();
 		if(word.length - from == 0){
 			if(exists  && value != -1){
@@ -52,10 +56,13 @@ public class TrieTree {
 		}else{
 			for(int i = from; i < word.length; i++){
 				int currentLetter = word[i];
-				if(currentLetter != -1 && children[currentLetter] != null){
-					LinkedList localDeepist = children[currentLetter].findDeepest(word,from + 1);
-					if(localDeepist.getLength() > deepist.getLength()){
-						deepist = localDeepist;
+				int previousLetter = previousLetter(word, from, i);
+				if(currentLetter != previousLetter){
+					if(currentLetter != -1 && children[currentLetter] != null){
+						LinkedList localDeepist = children[currentLetter].findDeepest(word,from + 1);
+						if(localDeepist.getLength() > deepist.getLength()){
+							deepist = localDeepist;
+						}
 					}
 				}
 			}
@@ -64,5 +71,12 @@ public class TrieTree {
 			}
 			return deepist;	
 		}
+	}
+	
+	private int previousLetter(int[] word, int from, int index){
+		if(index > from){
+			return word[index - 1];
+		}
+		return -1;
 	}
 }
