@@ -6,15 +6,19 @@ public class Main {
 	//optimazations 
 	//1 why does it run faster in eclipse
 	//2 the -1 thing
-	public static void main(String[] args) {
+	public static void main(String[] args) {//still have to turn words in the end to real words instead of alphabatized ones
 		long start = System.currentTimeMillis();
 		Reader reader = new Reader();
 		ArrayList<String> dictionaryLines = reader.read(args[0]);
 		ArrayList<String> puzzleLines = reader.read(args[1]);
 
-		TrieTree trieTree = new TrieTree();
-		trieTree.value = -1;// ugly thing has due to weirdish implementation of trietree
-		trieTree.insertList(dictionaryLines);
+//		TrieTree trieTree = new TrieTree();
+//		trieTree.value = -1;// ugly thing has due to weirdish implementation of trietree
+//		trieTree.insertList(dictionaryLines);
+		
+		TrieTree unalphabetized = new TrieTree();
+		unalphabetized.value = -1;
+		unalphabetized.insertList(dictionaryLines);
 		
 		ArrayList<String> solutions = new ArrayList<String>();
 		for(int i = 0; i < puzzleLines.size() / 8; i++){
@@ -25,20 +29,22 @@ public class Main {
 			int[] empty = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			while(!Arrays.equals(pyramid.getBottom(), empty)){
 				int[] bottom = pyramid.getBottom();
-				Arrays.sort(bottom);
-				LinkedList biggestWord = trieTree.findDeepest(bottom);
-				boolean[] removed = pyramid.removeArray(biggestWord.arrayifi());
-				for(int j = 0; j < removed.length; j++){
-					if(removed[j] == true){
-						string += j + 1;
-						System.out.print(j + 1);
-					}
-				}
-				string += ",";
-				System.out.print(",");
+//				Arrays.sort(bottom);//
+				LinkedList biggestWord = unalphabetized.findDeepestUnsorted(bottom);
+				System.out.println(biggestWord.stringify());
+//				System.out.println(biggestWord.arrayifi());
+				pyramid.removeArray(biggestWord.arrayifi());
+//				for(int j = 0; j < removed.length; j++){
+//					if(removed[j] == true){
+//						string += j + 1;
+//						System.out.print(j + 1);
+//					}
+//				}
+//				string += ",";
+//				System.out.print(",");
 			}
-			solutions.add(string);
-			System.out.println();
+//			solutions.add(string);
+//			System.out.println();
 		}
 		reader.write(args[2], solutions);
 		long end = System.currentTimeMillis();
