@@ -11,6 +11,12 @@ public class Pyramid {
 		}
 	}
 	
+	public void removeLocations(int[] array){
+		for(int i = 0; i < array.length; i++){
+			columns[array[i]].pop();
+		}
+	}
+	
 	public boolean[] removeArray(int[] array){
 		int[] bottom = getBottom();
 		boolean[] found = new boolean[columns.length];

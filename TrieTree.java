@@ -86,12 +86,10 @@ public class TrieTree {
 	
 	public LinkedList findDeepestUnsorted(int[] word,boolean[] used){
 		LinkedList deepist = new LinkedList();
-		if(allLettersUsed(used)){
-			if(exists  && value != -1){
-				deepist.addFirst(value);
-			}
+		if(allLettersUsed(used) && exists){
 			return deepist;
 		}else{
+			int indexofDeepist = -1;
 			for(int i = 0; i < word.length; i++){
 				if(used[i] == false){
 					int currentLetter = word[i];
@@ -100,15 +98,16 @@ public class TrieTree {
 						newUsed[i] = true;
 						LinkedList localDeepist = children[currentLetter].findDeepestUnsorted(word, newUsed);
 						if(localDeepist.getLength() > deepist.getLength()){
+							indexofDeepist = i;
 							deepist = localDeepist;
 						}
 					}
 				}
 			}
-			if((deepist.getLength() > 0 || exists) && value != -1 ){
-				deepist.addFirst(value);
+			if(deepist.getLength() > 0 || exists){
+				deepist.addFirst(indexofDeepist);
 			}
-			return deepist;	
+			return deepist;
 		}
 	}
 	

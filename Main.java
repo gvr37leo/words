@@ -17,7 +17,7 @@ public class Main {
 //		trieTree.insertList(dictionaryLines);
 		
 		TrieTree unalphabetized = new TrieTree();
-		unalphabetized.value = -1;
+		unalphabetized.value = -1;// not nescessary for unsorted but it has another bug
 		unalphabetized.insertList(dictionaryLines);
 		
 		ArrayList<String> solutions = new ArrayList<String>();
@@ -25,26 +25,27 @@ public class Main {
 			String string = "";
 			Pyramid pyramid = new Pyramid();
 			pyramid.insertArrayListString(puzzleLines, i * 8, i * 8 + 8);
-			
+		
 			int[] empty = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			while(!Arrays.equals(pyramid.getBottom(), empty)){
 				int[] bottom = pyramid.getBottom();
-//				Arrays.sort(bottom);//
-				LinkedList biggestWord = unalphabetized.findDeepestUnsorted(bottom);
-				System.out.println(biggestWord.stringify());
-//				System.out.println(biggestWord.arrayifi());
-				pyramid.removeArray(biggestWord.arrayifi());
-//				for(int j = 0; j < removed.length; j++){
-//					if(removed[j] == true){
-//						string += j + 1;
-//						System.out.print(j + 1);
-//					}
-//				}
-//				string += ",";
-//				System.out.print(",");
+				LinkedList longest = unalphabetized.findDeepestUnsorted(bottom);
+				longest.remove(longest.getLength() - 1);// -1 due to bug
+				pyramid.removeLocations(longest.arrayifi());// removearray doesnt work here
+				
+				int[] array = longest.arrayifi();
+				String row = "";
+				for(int j = 0; j < array.length; j++){
+					array[j]++;
+					row += array[j];
+				}
+				
+				System.out.print(row + ",");
+				
+				string += row + ",";
 			}
-//			solutions.add(string);
-//			System.out.println();
+			solutions.add(string);
+			System.out.println();
 		}
 		reader.write(args[2], solutions);
 		long end = System.currentTimeMillis();
