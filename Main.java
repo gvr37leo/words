@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Main {
 	//optimazations 
-	//1 why does it run faster in eclipse
+	//skip duplicates
 	//2 the -1 thing
 	public static void main(String[] args) {//still have to turn words in the end to real words instead of alphabatized ones
 		long start = System.currentTimeMillis();
@@ -17,7 +17,6 @@ public class Main {
 //		trieTree.insertList(dictionaryLines);
 		
 		TrieTree unalphabetized = new TrieTree();
-		unalphabetized.value = -1;// not nescessary for unsorted but it has another bug
 		unalphabetized.insertList(dictionaryLines);
 		
 		ArrayList<String> solutions = new ArrayList<String>();

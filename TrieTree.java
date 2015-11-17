@@ -10,25 +10,25 @@ public class TrieTree {
 	
 	public void insertList(ArrayList<String> list){
 		for(int i = 0; i < list.size(); i++){
-			LinkedList newLinkedList = new LinkedList();
-			newLinkedList.stringToThis(list.get(i));
-//			newLinkedList.sort();//
-			this.insert(newLinkedList);
+			this.insert(stringToIntArray(list.get(i)));
 		}
 	}
 	
-	public void insert(LinkedList string){
-		if(string.getLength() == 0){
+	public void insert(int[] word){
+		insert(word, 0);
+	}
+	
+	private void insert(int[] word,int current){
+		if(word.length == current){
 			exists = true;
 			return;
 		}
-		int index = string.get(0);
+		int index = word[current];
 		if(children[index] == null){
 			children[index] = new TrieTree();
 			children[index].value = index;
 		}
-		LinkedList linkedList = string.copy(1, string.getLength());// maybe pointers?
-		children[index].insert(linkedList);
+		children[index].insert(word,current + 1);
 	}
 	
 	public boolean exists(LinkedList string){
@@ -41,42 +41,6 @@ public class TrieTree {
 		}
 		LinkedList linkedList = string.copy(1, string.getLength());
 		return children[index].exists(linkedList);
-	}
-	
-	public LinkedList findDeepest(int[] word){
-		return findDeepest(word,0);
-	}
-	
-	private LinkedList findDeepest(int[] word,int from){
-		LinkedList deepist = new LinkedList();
-		if(word.length - from == 0){
-			if(exists  && value != -1){
-				deepist.addFirst(value);
-			}
-			return deepist;
-		}else{
-			for(int i = from; i < word.length; i++){
-				int currentLetter = word[i];
-				int previousLetter = previousLetter(word, from, i);
-				if(currentLetter != -1 && children[currentLetter] != null && currentLetter != previousLetter){//
-					LinkedList localDeepist = children[currentLetter].findDeepest(word,from + 1);//+
-					if(localDeepist.getLength() > deepist.getLength()){
-						deepist = localDeepist;
-					}
-				}
-			}
-			if((deepist.getLength() > 0 || exists) && value != -1 ){
-				deepist.addFirst(value);
-			}
-			return deepist;	
-		}
-	}
-	
-	private int previousLetter(int[] word, int from, int index){
-		if(index > from){
-			return word[index - 1];
-		}
-		return -1;
 	}
 	
 	public LinkedList findDeepestUnsorted(int[] word){
@@ -119,5 +83,14 @@ public class TrieTree {
 			}
 		}
 		return allLettersUsed;
+	}
+	
+	public int[] stringToIntArray(String string){
+		int[] array = new int[string.length()];
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		for(int i = 0; i < string.length(); i++){
+			array[i] = alphabet.indexOf(string.charAt(i));
+		}
+		return array;
 	}
 }

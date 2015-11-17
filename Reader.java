@@ -14,7 +14,7 @@ public class Reader {
 	        }   
 	        bufferedReader.close();  
 		} catch(FileNotFoundException ex) {
-			System.out.println(file + "is not present in this directory");
+			System.out.println(file + " is not present in this directory");
 		}
 	    catch(IOException ex) {
 	    	System.out.println("wrong input");
