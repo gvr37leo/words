@@ -6,6 +6,8 @@ public class Main {
 	//optimazations 
 	//skip duplicates
 	//2 the -1 thing
+	//stringbuilder
+	//do 1 write
 	public static void main(String[] args) {//still have to turn words in the end to real words instead of alphabatized ones
 		long start = System.currentTimeMillis();
 		Reader reader = new Reader();
@@ -33,18 +35,19 @@ public class Main {
 				pyramid.removeLocations(longest.arrayifi());// removearray doesnt work here
 				
 				int[] array = longest.arrayifi();
-				String row = "";
+				StringBuilder row = new StringBuilder();
+//				String row = "";
 				for(int j = 0; j < array.length; j++){
 					array[j]++;
-					row += array[j];
+					row.append(array[j]);
 				}
 				
-				System.out.print(row + ",");
+//				System.out.print(row + ",");
 				
 				string += row + ",";
 			}
 			solutions.add(string);
-			System.out.println();
+//			System.out.println();
 		}
 		reader.write(args[2], solutions);
 		long end = System.currentTimeMillis();

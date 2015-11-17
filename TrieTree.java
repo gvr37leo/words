@@ -54,10 +54,12 @@ public class TrieTree {
 			return deepist;
 		}else{
 			int indexofDeepist = -1;
+			boolean[] checked = new boolean[26];
 			for(int i = 0; i < word.length; i++){
 				if(used[i] == false){
 					int currentLetter = word[i];
-					if(currentLetter != -1 && children[currentLetter] != null){
+					if(currentLetter != -1 && children[currentLetter] != null && checked[currentLetter] == false){
+						checked[currentLetter] = true;
 						boolean[] newUsed = Arrays.copyOfRange(used, 0, used.length);
 						newUsed[i] = true;
 						LinkedList localDeepist = children[currentLetter].findDeepestUnsorted(word, newUsed);
