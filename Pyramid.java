@@ -3,17 +3,17 @@ package main;
 import java.util.ArrayList;
 
 public class Pyramid {
-	Stack[] columns = new Stack[9];
+	DLList[] columns = new DLList[9];
 	
 	public Pyramid(){
 		for (int i = 0; i < columns.length; i++) {
-			columns[i] = new Stack();
+			columns[i] = new DLList();
 		}
 	}
 	
 	public void removeLocations(int[] array){
 		for(int i = 0; i < array.length; i++){
-			columns[array[i]].pop();
+			columns[array[i]].removeFirst();
 		}
 	}
 	
@@ -23,7 +23,7 @@ public class Pyramid {
 		for(int i = 0; i < array.length; i++){
 			int index = indexOfUnfound(array[i], bottom, found);
 			if(index != -1){
-				columns[index].pop();
+				columns[index].removeFirst();
 				found[index] = true;
 			}
 		}
@@ -35,7 +35,7 @@ public class Pyramid {
 		for (int i = 0; i < columns.length && i < string.length(); i++) {
 			int currentChar = alphabet.indexOf(string.charAt(i));
 			if (currentChar != -1) {
-				columns[i].push(currentChar); 
+				columns[i].addFirst(currentChar); 
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public class Pyramid {
 	public int[] getBottom(){
 		int[] bottom = new int[columns.length];
 		for(int i = 0; i < columns.length; i++){
-			bottom[i] = columns[i].top();
+			bottom[i] = columns[i].get(0).value;
 		}
 		return bottom;
 	}
