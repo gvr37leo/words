@@ -21,9 +21,9 @@ public class Main {
 		TrieTree unalphabetized = new TrieTree();
 		unalphabetized.insertList(dictionaryLines);
 		
-		ArrayList<String> solutions = new ArrayList<String>();
+		StringBuilder row = new StringBuilder();
 		for(int i = 0; i < puzzleLines.size() / 8; i++){
-			String string = "";
+			
 			Pyramid pyramid = new Pyramid();
 			pyramid.insertArrayListString(puzzleLines, i * 8, i * 8 + 8);
 		
@@ -35,21 +35,19 @@ public class Main {
 				pyramid.removeLocations(longest.arrayifi());// removearray doesnt work here
 				
 				int[] array = longest.arrayifi();
-				StringBuilder row = new StringBuilder();
-//				String row = "";
+				
 				for(int j = 0; j < array.length; j++){
 					array[j]++;
 					row.append(array[j]);
 				}
-				
-//				System.out.print(row + ",");
-				
-				string += row + ",";
+				row.append(",");
 			}
-			solutions.add(string);
-//			System.out.println();
+			row.append("\r\n");
 		}
-		reader.write(args[2], solutions);
+		ArrayList<String> test = new ArrayList<String>();
+		test.add(row.toString());
+		
+		reader.write(args[2], test);
 		long end = System.currentTimeMillis();
 		System.out.println((end - start) + " ms");
 	}
