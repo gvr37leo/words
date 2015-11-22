@@ -10,7 +10,11 @@ public class TrieTree {
 	
 	public void insertList(ArrayList<String> list){
 		for(int i = 0; i < list.size(); i++){
-			this.insert(stringToIntArray(list.get(i)));
+			String string = list.get(i);
+			if(string.length() < 6){
+				int[] array = stringToIntArray(string);
+				this.insert(array);
+			}
 		}
 	}
 	
